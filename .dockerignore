@@ -1,0 +1,16 @@
+.git
+.gitignore
+**pycache**/
+_.pyc
+_.pyo
+_.pyd
+_.ipynb
+.env
+.env\*
+data/
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+dist/
+build/
