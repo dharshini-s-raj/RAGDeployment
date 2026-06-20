@@ -24,12 +24,17 @@ jobs:
           tags: |
             dhivya1611/session1-rag:latest
             dhivya1611/session1-rag:${{ steps.vars.outputs.sha_short }}
+      - name: Write SSH Private Key
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s' '${{ secrets.VM_SSH_KEY }}' > ~/.ssh/id_ed25519_github
+          chmod 600 ~/.ssh/id_ed25519_github
       - name: Deploy to VM
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VM_IP }}
           username: ${{ secrets.VM_USERNAME }}
-          key: ${{ secrets.VM_SSH_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }} # <-- Changed from key_path to key
           script: |
             docker pull dhivya1611/session1-rag:latest
             docker stop api-server || true
