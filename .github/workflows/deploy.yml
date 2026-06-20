@@ -34,7 +34,7 @@ jobs:
         with:
           host: ${{ secrets.VM_IP }}
           username: ${{ secrets.VM_USERNAME }}
-          key_path: ~/.ssh/id_ed25519_github
+          key: ${{ secrets.SSH_PRIVATE_KEY }} # <-- Changed from key_path to key
           script: |
             docker pull dhivya1611/session1-rag:latest
             docker stop api-server || true
